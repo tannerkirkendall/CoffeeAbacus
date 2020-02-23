@@ -5,7 +5,7 @@
         <div class="brew large-4 columns">
           <h2>Total Brew</h2>
           <input type="Number" name="brew" min="0" v-model="totalBrew" v-on:input="changeTotal" />
-          <select name="brewUnit" v-model="unitBrew" v-on:input="getValuesAndCalculate">
+          <select name="brewUnit" v-model="unitBrew" v-on:change="getValuesAndCalculate">
             <option value="1">Milliliters</option>
             <option value="236.588">Cups</option>
             <option value="29.5735">Ounces</option>
@@ -14,7 +14,7 @@
         <div class="large-4 product-item columns water">
           <h2>Water</h2>
           <input type="Number" name="water" min="0" v-model="totalWater" v-on:input="changeWater" />
-          <select name="waterUnit" v-model="unitWater"  v-on:input="getValuesAndCalculate">
+          <select name="waterUnit" v-model="unitWater"  v-on:change="getValuesAndCalculate">
             <option value="1">Milliliters</option>
             <option value="236.588">Cups</option>
             <option selected value="29.5735">Ounces</option>
@@ -24,7 +24,7 @@
         <div class="large-4 product-item columns grounds">
           <h2>Grounds</h2>
           <input type="Number" name="grounds" min="0" v-model="totalGrounds" v-on:input="changeGrounds" />
-          <select name="groundsUnit" v-model="unitGrounds" v-on:input="getValuesAndCalculate">
+          <select name="groundsUnit" v-model="unitGrounds" v-on:change="getValuesAndCalculate">
             <option value="1">Grams</option>
             <option value="28.3527076">Ounces</option>
             <option value="7.00035">Tablespoons</option>
@@ -35,7 +35,7 @@
 
       <div class="ratio large-4 columns">
         <h2>Ratio</h2>
-        <select name="ratio" v-model="ratio" v-on:input="getValuesAndCalculate">
+        <select name="ratio" v-model="ratio" v-on:change="getValuesAndCalculate">
           <option value="14">14:1</option>
           <option value="15">15:1</option>
           <option value="16">16:1</option>
@@ -75,10 +75,9 @@ export default {
       this.lastSet = "total";
       this.getValuesAndCalculate();
     },
-
     getValuesAndCalculate: function() {
       // eslint-disable-next-line
-      console.log(this.lastSet);
+      console.log(this.unitBrew);
       switch (this.lastSet) {
         case "grounds":
           this.totalWater = this.calculateWaterRatio(
@@ -87,8 +86,6 @@ export default {
             this.unitWater,
             this.ratio
           );
-                // eslint-disable-next-line
-      console.log(this.totalWater);
           this.calculateBrewRatio(
             this.totalWater,
             this.unitWater,
