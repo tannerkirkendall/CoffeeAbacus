@@ -1,49 +1,104 @@
 <template>
-  <div>
-    <form class="ratioCalc" name="form" id="form">
-      <div class="row">
-        <div class="brew large-4 columns">
+  <div class="main">
+    <v-container>
+      <v-row class="text-center">
+        <v-col cols="12">
+          <v-img :src="require('../assets/logo.svg')" class="my-3" contain height="50" />
+        </v-col>
+
+        <v-col class="mb-4">
+          <h1 class="display-2 font-weight-bold mb-3">Welcome to Coffee Abacus</h1>
+
+          <p class="subheading font-weight-regular">
+            For help and collaboration with other Vuetify developers,
+            <br />please join our online
+            <a
+              href="https://community.vuetifyjs.com"
+              target="_blank"
+            >Discord Community</a>
+          </p>
+        </v-col>
+
+        <v-col class="mb-5" cols="12">
           <h2>Total Brew</h2>
-          <input type="Number" name="brew" min="0" v-model="totalBrew" v-on:input="changeTotal" />
-          <select name="brewUnit" v-model="unitBrew" v-on:change="getValuesAndCalculate">
-            <option value="1">Milliliters</option>
-            <option value="236.588">Cups</option>
-            <option value="29.5735">Ounces</option>
-          </select>
-        </div>
-        <div class="large-4 product-item columns water">
+          <v-layout row wrap>
+            <v-flex xs8>
+              <v-text-field
+                :rules="rules"
+                type="Number"
+                name="brew"
+                min="0"
+                v-model="totalBrew"
+                v-on:input="changeTotal"
+              ></v-text-field>
+            </v-flex>
+            <v-flex xs4>
+              <select name="brewUnit" v-model="unitBrew" v-on:change="getValuesAndCalculate">
+                <option value="1">Milliliters</option>
+                <option value="236.588">Cups</option>
+                <option value="29.5735">Ounces</option>
+              </select>
+            </v-flex>
+          </v-layout>
+        </v-col>
+
+        <v-col class="mb-5" cols="12">
           <h2>Water</h2>
-          <input type="Number" name="water" min="0" v-model="totalWater" v-on:input="changeWater" />
-          <select name="waterUnit" v-model="unitWater"  v-on:change="getValuesAndCalculate">
-            <option value="1">Milliliters</option>
-            <option value="236.588">Cups</option>
-            <option selected value="29.5735">Ounces</option>
-          </select>
-        </div>
+          <v-layout row wrap>
+            <v-flex xs8>
+              <v-text-field
+                :rules="rules"
+                type="Number"
+                name="water"
+                min="0"
+                v-model="totalWater"
+                v-on:input="changeWater"
+              ></v-text-field>
+            </v-flex>
+            <v-flex xs4>
+              <select name="waterUnit" v-model="unitWater" v-on:change="getValuesAndCalculate">
+                <option value="1">Milliliters</option>
+                <option value="236.588">Cups</option>
+                <option selected value="29.5735">Ounces</option>
+              </select>
+            </v-flex>
+          </v-layout>
+        </v-col>
 
-        <div class="large-4 product-item columns grounds">
+        <v-col class="mb-5" cols="12">
           <h2>Grounds</h2>
-          <input type="Number" name="grounds" min="0" v-model="totalGrounds" v-on:input="changeGrounds" />
-          <select name="groundsUnit" v-model="unitGrounds" v-on:change="getValuesAndCalculate">
-            <option value="1">Grams</option>
-            <option value="28.3527076">Ounces</option>
-            <option value="7.00035">Tablespoons</option>
+          <v-layout row wrap>
+            <v-flex xs8>
+              <v-text-field
+                :rules="rules"
+                type="Number"
+                name="grounds"
+                min="0"
+                v-model="totalGrounds"
+                v-on:input="changeGrounds"
+              ></v-text-field>
+            </v-flex>
+            <v-flex xs4>
+              <select name="groundsUnit" v-model="unitGrounds" v-on:change="getValuesAndCalculate">
+                <option value="1">Grams</option>
+                <option value="28.3527076">Ounces</option>
+                <option value="7.00035">Tablespoons</option>
+              </select>
+            </v-flex>
+          </v-layout>
+        </v-col>
+        <v-col class="mb-5" cols="12">
+          <h2>Ratio</h2>
+          <select name="ratio" v-model="ratio" v-on:change="getValuesAndCalculate">
+            <option value="14">14:1</option>
+            <option value="15">15:1</option>
+            <option value="16">16:1</option>
+            <option selected value="17">17:1</option>
+            <option value="18">18:1</option>
           </select>
-          <br />
-        </div>
-      </div>
-
-      <div class="ratio large-4 columns">
-        <h2>Ratio</h2>
-        <select name="ratio" v-model="ratio" v-on:change="getValuesAndCalculate">
-          <option value="14">14:1</option>
-          <option value="15">15:1</option>
-          <option value="16">16:1</option>
-          <option selected value="17">17:1</option>
-          <option value="18">18:1</option>
-        </select>
-      </div>
-    </form>
+        </v-col>
+      </v-row>
+    </v-container>
   </div>
 </template>
 
@@ -151,3 +206,8 @@ export default {
   }
 };
 </script>
+<style scoped>
+.main {
+  padding: 15%;
+}
+</style>
