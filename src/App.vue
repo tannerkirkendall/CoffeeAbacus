@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar app color="primary" dark></v-app-bar>
+    <v-app-bar app color="primary" dark>Coffee Abacus</v-app-bar>
     <v-content>
       <Calculator />
     </v-content>
