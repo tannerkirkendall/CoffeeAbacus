@@ -2,13 +2,9 @@
   <div class="main">
     <v-container>
       <v-row class="text-center">
-        <v-col cols="12">
-          <v-img :src="require('../assets/logo.svg')" class="my-3" contain height="50" />
-        </v-col>
-
-        <v-col class="mb-4">
-          <h1 class="display-2 font-weight-bold mb-3">Coffee Abacus</h1>
-
+        <v-col class="mb-2">
+          <h1 class="display-3 font-weight-bold mb-3">Coffee Abacus</h1>
+<!-- 
           <p class="subheading font-weight-regular">
             For help and collaboration with other Vuetify developers,
             <br />please join our online
@@ -16,7 +12,7 @@
               href="https://community.vuetifyjs.com"
               target="_blank"
             >Discord Community</a>
-          </p>
+          </p> -->
         </v-col>
 
         <v-col class="mb-5" cols="12">
@@ -96,14 +92,6 @@
               </v-list-item>
             </v-list>
           </v-menu>
-
-          <!-- <select name="ratio" v-model="ratio" v-on:change="getValuesAndCalculate">
-            <option value="14">14:1</option>
-            <option value="15">15:1</option>
-            <option value="16">16:1</option>
-            <option selected value="17">17:1</option>
-            <option value="18">18:1</option>
-          </select>-->
         </v-col>
       </v-row>
     </v-container>
@@ -130,12 +118,6 @@ export default {
         { title: "16:1", value: 16 },
         { title: "17:1", value: 17 },
         { title: "18:1", value: 18 }
-      ],
-      items: [
-        { title: "Click Me" },
-        { title: "Click Me" },
-        { title: "Click Me" },
-        { title: "Click Me 2" }
       ]
     };
   },
@@ -151,15 +133,32 @@ export default {
     },
     changeGrounds: function() {
       this.lastSet = "grounds";
-      this.getValuesAndCalculate();
+      if (this.totalGrounds === ""){
+        this.blankValues();
+      }else{
+        this.getValuesAndCalculate();
+      }
     },
     changeWater: function() {
       this.lastSet = "water";
-      this.getValuesAndCalculate();
+      if (this.totalWater === "") {
+        this.blankValues();
+      } else {
+        this.getValuesAndCalculate();
+      }
     },
     changeTotal: function() {
       this.lastSet = "total";
-      this.getValuesAndCalculate();
+      if (this.totalBrew === "") {
+        this.blankValues();
+      } else {
+        this.getValuesAndCalculate();
+      }
+    },
+    blankValues: function() {
+      this.totalBrew = "";
+      this.totalGrounds = "";
+      this.totalWater = "";
     },
     getValuesAndCalculate: function() {
       // eslint-disable-next-line
