@@ -226,9 +226,10 @@ export default {
 </script>
 <style scoped>
 #back-box {
-  width: 30%;
+  width: 40%;
   background-color:whitesmoke;
   border-radius: 15px;
+  padding: 30px;
 }
 #control-box {
   width: 90%; /*can be in percentage also.*/
@@ -245,9 +246,7 @@ export default {
   width: 100%;
 }
 .input-line {
-  width: 80%;
+  width: 75%;
   /* background-color: brown; */
-}
-.input-unit {
 }
 </style>
