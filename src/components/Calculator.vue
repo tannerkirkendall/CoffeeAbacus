@@ -225,11 +225,17 @@ export default {
 };
 </script>
 <style scoped>
+.main {
+  padding: 25px;
+}
 #back-box {
-  width: 40%;
+  width: 100%;
+  max-width: 500px;
+  min-width: 200px;
   background-color:whitesmoke;
   border-radius: 15px;
   padding: 30px;
+  margin: auto;
 }
 #control-box {
   width: 90%; /*can be in percentage also.*/
