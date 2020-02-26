@@ -7,7 +7,7 @@
         </v-col>
 
         <v-col class="mb-4">
-          <h1 class="display-2 font-weight-bold mb-3">Welcome to Coffee Abacus</h1>
+          <h1 class="display-2 font-weight-bold mb-3">Coffee Abacus</h1>
 
           <p class="subheading font-weight-regular">
             For help and collaboration with other Vuetify developers,
@@ -24,7 +24,6 @@
           <v-layout row wrap>
             <v-flex xs8>
               <v-text-field
-                :rules="rules"
                 type="Number"
                 name="brew"
                 min="0"
@@ -47,7 +46,6 @@
           <v-layout row wrap>
             <v-flex xs8>
               <v-text-field
-                :rules="rules"
                 type="Number"
                 name="water"
                 min="0"
@@ -70,7 +68,6 @@
           <v-layout row wrap>
             <v-flex xs8>
               <v-text-field
-                :rules="rules"
                 type="Number"
                 name="grounds"
                 min="0"
@@ -89,13 +86,24 @@
         </v-col>
         <v-col class="mb-5" cols="12">
           <h2>Ratio</h2>
-          <select name="ratio" v-model="ratio" v-on:change="getValuesAndCalculate">
+          <v-menu offset-y>
+            <template v-slot:activator="{ on }">
+              <v-btn color="primary" dark v-on="on">{{ratioTitle}}</v-btn>
+            </template>
+            <v-list>
+              <v-list-item v-for="(item, index) in ratiosList" :key="index" @click="set">
+                <v-list-item-title>{{ item.title }}</v-list-item-title>
+              </v-list-item>
+            </v-list>
+          </v-menu>
+
+          <!-- <select name="ratio" v-model="ratio" v-on:change="getValuesAndCalculate">
             <option value="14">14:1</option>
             <option value="15">15:1</option>
             <option value="16">16:1</option>
             <option selected value="17">17:1</option>
             <option value="18">18:1</option>
-          </select>
+          </select>-->
         </v-col>
       </v-row>
     </v-container>
@@ -114,10 +122,33 @@ export default {
       unitGrounds: "1",
       unitBrew: "29.5735",
       unitWater: "1",
-      ratio: "17"
+      ratio: "17",
+      ratioTitle: "17:1",
+      ratiosList: [
+        { title: "14:1", value: 14 },
+        { title: "15:1", value: 15 },
+        { title: "16:1", value: 16 },
+        { title: "17:1", value: 17 },
+        { title: "18:1", value: 18 }
+      ],
+      items: [
+        { title: "Click Me" },
+        { title: "Click Me" },
+        { title: "Click Me" },
+        { title: "Click Me 2" }
+      ]
     };
   },
   methods: {
+    set: function(a) {
+      // eslint-disable-next-line
+      console.log(this, a.target.innerText);
+      var title = a.target.innerText;
+      var value = this.ratiosList.find(x => x.title == title).value;
+      this.ratio = value;
+      this.ratioTitle = title;
+      this.getValuesAndCalculate();
+    },
     changeGrounds: function() {
       this.lastSet = "grounds";
       this.getValuesAndCalculate();
