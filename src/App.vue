@@ -22,3 +22,11 @@ export default {
   })
 };
 </script>
+<style scoped>
+.clac {
+  margin: auto;
+  width: 50%;
+  border: 13px solid green;
+  padding: 10px;
+}
+</style>

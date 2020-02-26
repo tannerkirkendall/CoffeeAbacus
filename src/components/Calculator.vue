@@ -1,86 +1,74 @@
 <template>
   <div class="main">
-    <v-container>
-      <v-row class="text-center">
-        <v-col class="mb-2">
-          <h1 class="display-3 font-weight-bold mb-3">Coffee Abacus</h1>
-<!-- 
-          <p class="subheading font-weight-regular">
-            For help and collaboration with other Vuetify developers,
-            <br />please join our online
-            <a
-              href="https://community.vuetifyjs.com"
-              target="_blank"
-            >Discord Community</a>
-          </p> -->
-        </v-col>
-
-        <v-col class="mb-5" cols="12">
+    <div id="back-box">
+      <div id="control-box">
+        <div class="input-head">
           <h2>Total Brew</h2>
-          <v-layout row wrap>
-            <v-flex xs8>
-              <v-text-field
-                type="Number"
-                name="brew"
-                min="0"
-                v-model="totalBrew"
-                v-on:input="changeTotal"
-              ></v-text-field>
-            </v-flex>
-            <v-flex xs4>
-              <select name="brewUnit" v-model="unitBrew" v-on:change="getValuesAndCalculate">
-                <option value="1">Milliliters</option>
-                <option value="236.588">Cups</option>
-                <option value="29.5735">Ounces</option>
-              </select>
-            </v-flex>
-          </v-layout>
-        </v-col>
+        </div>
+        <div class="input-box">
+          <div class="input-line">
+            <v-text-field
+              type="Number"
+              name="brew"
+              min="0"
+              v-model="totalBrew"
+              v-on:input="changeTotal"
+            ></v-text-field>
+          </div>
+          <div class="input-unit">
+            <select name="brewUnit" v-model="unitBrew" v-on:change="getValuesAndCalculate">
+              <option value="1">Milliliters</option>
+              <option value="236.588">Cups</option>
+              <option value="29.5735">Ounces</option>
+            </select>
+          </div>
+        </div>
 
-        <v-col class="mb-5" cols="12">
+        <div class="input-head">
           <h2>Water</h2>
-          <v-layout row wrap>
-            <v-flex xs8>
-              <v-text-field
-                type="Number"
-                name="water"
-                min="0"
-                v-model="totalWater"
-                v-on:input="changeWater"
-              ></v-text-field>
-            </v-flex>
-            <v-flex xs4>
-              <select name="waterUnit" v-model="unitWater" v-on:change="getValuesAndCalculate">
-                <option value="1">Milliliters</option>
-                <option value="236.588">Cups</option>
-                <option selected value="29.5735">Ounces</option>
-              </select>
-            </v-flex>
-          </v-layout>
-        </v-col>
+        </div>
+        <div class="input-box">
+          <div class="input-line">
+            <v-text-field
+              type="Number"
+              name="water"
+              min="0"
+              v-model="totalWater"
+              v-on:input="changeWater"
+            ></v-text-field>
+          </div>
+          <div class="input-unit">
+            <select name="waterUnit" v-model="unitWater" v-on:change="getValuesAndCalculate">
+              <option value="1">Milliliters</option>
+              <option value="236.588">Cups</option>
+              <option selected value="29.5735">Ounces</option>
+            </select>
+          </div>
+        </div>
 
-        <v-col class="mb-5" cols="12">
+        <div class="input-head">
           <h2>Grounds</h2>
-          <v-layout row wrap>
-            <v-flex xs8>
-              <v-text-field
-                type="Number"
-                name="grounds"
-                min="0"
-                v-model="totalGrounds"
-                v-on:input="changeGrounds"
-              ></v-text-field>
-            </v-flex>
-            <v-flex xs4>
-              <select name="groundsUnit" v-model="unitGrounds" v-on:change="getValuesAndCalculate">
-                <option value="1">Grams</option>
-                <option value="28.3527076">Ounces</option>
-                <option value="7.00035">Tablespoons</option>
-              </select>
-            </v-flex>
-          </v-layout>
-        </v-col>
-        <v-col class="mb-5" cols="12">
+        </div>
+        <div class="input-box">
+          <div class="input-line">
+            <v-text-field
+              type="Number"
+              name="grounds"
+              min="0"
+              v-model="totalGrounds"
+              v-on:input="changeGrounds"
+            ></v-text-field>
+          </div>
+          <div class="input-unit">
+            <select name="groundsUnit" v-model="unitGrounds" v-on:change="getValuesAndCalculate">
+              <option value="1">Grams</option>
+              <option value="28.3527076">Ounces</option>
+              <option value="7.00035">Tablespoons</option>
+            </select>
+          </div>
+        </div>
+
+
           <h2>Ratio</h2>
           <v-menu offset-y>
             <template v-slot:activator="{ on }">
@@ -92,9 +80,9 @@
               </v-list-item>
             </v-list>
           </v-menu>
-        </v-col>
-      </v-row>
-    </v-container>
+
+      </div>
+    </div>
   </div>
 </template>
 
@@ -133,9 +121,9 @@ export default {
     },
     changeGrounds: function() {
       this.lastSet = "grounds";
-      if (this.totalGrounds === ""){
+      if (this.totalGrounds === "") {
         this.blankValues();
-      }else{
+      } else {
         this.getValuesAndCalculate();
       }
     },
@@ -237,7 +225,29 @@ export default {
 };
 </script>
 <style scoped>
-.main {
-  padding: 15%;
+#back-box {
+  width: 30%;
+  background-color:whitesmoke;
+  border-radius: 15px;
+}
+#control-box {
+  width: 90%; /*can be in percentage also.*/
+  /* background-color: aqua; */
+  height: auto;
+  margin: 0 auto;
+  position: relative;
+}
+.input-box {
+  /* background-color: blue; */
+  display: flex;
+}
+.input-head {
+  width: 100%;
+}
+.input-line {
+  width: 80%;
+  /* background-color: brown; */
+}
+.input-unit {
 }
 </style>
