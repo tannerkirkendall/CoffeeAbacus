@@ -2,71 +2,57 @@
   <div class="main">
     <div id="back-box">
       <div id="control-box">
-        <div class="input-head">
-          <h2>Total Brew</h2>
-        </div>
-        <div class="input-box">
-          <div class="input-line">
-            <v-text-field
-              type="Number"
-              name="brew"
-              min="0"
-              v-model="totalBrew"
-              v-on:input="changeTotal"
-            ></v-text-field>
-          </div>
-          <div class="input-unit">
-            <div class="select">
-              <select
-                v-model="unitBrew"
-                class="select-text"
-                required
-                v-on:change="getValuesAndCalculate"
-              >
-                <option value="1">Milliliters</option>
-                <option value="236.588">Cups</option>
-                <option value="29.5735">Ounces</option>
-              </select>
-              <span class="select-highlight"></span>
-              <span class="select-bar"></span>
-              <label class="select-label"></label>
-            </div>
-          </div>
-        </div>
-
-        <div class="input-head">
-          <h2>Water</h2>
-        </div>
-        <div class="input-box">
-          <div class="input-line">
-            <v-text-field
-              type="Number"
-              name="water"
-              min="0"
-              v-model="totalWater"
-              v-on:input="changeWater"
-            ></v-text-field>
-          </div>
-          <div class="input-unit">
-            <div class="select">
-              <select
-                v-model="unitWater"
-                class="select-text"
-                required
-                v-on:change="getValuesAndCalculate"
-              >
-                <option value="1">Milliliters</option>
-                <option value="236.588">Cups</option>
-                <option selected value="29.5735">Ounces</option>
-              </select>
-              <span class="select-highlight"></span>
-              <span class="select-bar"></span>
-              <label class="select-label"></label>
-            </div>
-          </div>
-        </div>
-
         <v-container fluid>
+          <h2>Total Brew</h2>
+          <v-row align="center">
+            <v-col class="d-flex" cols="6" sm="6" xs="2">
+              <v-text-field
+                type="Number"
+                name="brew"
+                min="0"
+                v-model="totalBrew"
+                v-on:input="changeTotal"
+              ></v-text-field>
+            </v-col>
+
+            <v-col class="d-flex" cols="6" sm="6" xs="2">
+              <v-select
+                v-model="unitBrewSelect"
+                :items="unitListVolume"
+                item-text="title"
+                item-value="value"
+                v-on:change="getValuesAndCalculate"
+                return-object
+                outlined
+              ></v-select>
+            </v-col>
+          </v-row>
+
+          <h2>Water</h2>
+          <v-row align="center">
+            <v-col class="d-flex" cols="6" sm="6" xs="2">
+              <v-text-field
+                type="Number"
+                name="water"
+                min="0"
+                v-model="totalWater"
+                v-on:input="changeWater"
+              ></v-text-field>
+            </v-col>
+
+            <v-col class="d-flex" cols="6" sm="6" xs="2">
+              <v-select
+                v-model="unitWaterSelect"
+                :items="unitListVolume"
+                item-text="title"
+                item-value="value"
+                v-on:change="getValuesAndCalculate"
+                return-object
+                outlined
+              ></v-select>
+            </v-col>
+          </v-row>
+
           <h2>Grounds</h2>
           <v-row align="center">
             <v-col class="d-flex" cols="6" sm="6" xs="2">
@@ -95,17 +81,16 @@
           <h2>Ratio</h2>
           <v-row align="center">
             <v-col class="d-flex" cols="12" sm="12">
-            <v-select
-              v-model="ratioSelect"
-              :items="ratiosList"
-              item-text="title"
-              item-value="value"
-              v-on:change="getValuesAndCalculate"
-              return-object
-              outlined
-            ></v-select>
+              <v-select
+                v-model="ratioSelect"
+                :items="ratiosList"
+                item-text="title"
+                item-value="value"
+                v-on:change="getValuesAndCalculate"
+                return-object
+                outlined
+              ></v-select>
             </v-col>
-
           </v-row>
         </v-container>
       </div>
@@ -123,9 +108,7 @@ export default {
       totalBrew: "",
       totalWater: "",
       unitGroundsSelect: { title: "Grams", value: 1 },
-      unitBrew: "29.5735",
       unitBrewSelect: { title: "Ounces", value: 29.5735 },
-      unitWater: "1",
       unitWaterSelect: { title: "Milliliters", value: 1 },
       unitListVolume: [
         { title: "Milliliters", value: 1 },
@@ -178,50 +161,48 @@ export default {
       this.totalWater = "";
     },
     getValuesAndCalculate: function() {
-      // eslint-disable-next-line
-      console.log(this.unitBrew);
       switch (this.lastSet) {
         case "grounds":
           this.totalWater = this.calculateWaterRatio(
             this.totalGrounds,
             this.unitGroundsSelect.value,
-            this.unitWater,
+            this.unitWaterSelect.value,
             this.ratioSelect.value
           );
           this.calculateBrewRatio(
             this.totalWater,
-            this.unitWater,
+            this.unitWaterSelect.value,
             this.totalGrounds,
             this.unitGroundsSelect.value,
-            this.unitBrew
+            this.unitBrewSelect.value
           );
           break;
         case "water":
           this.totalGrounds = this.calculateGroundsRatio(
             this.totalWater,
-            this.unitWater,
+            this.unitWaterSelect.value,
             this.ratioSelect.value,
             this.unitGroundsSelect.value
           );
           this.calculateBrewRatio(
             this.totalWater,
-            this.unitWater,
+            this.unitWaterSelect.value,
             this.totalGrounds,
             this.unitGroundsSelect.value,
-            this.unitBrew
+            this.unitBrewSelect.value
           );
           break;
         case "total":
           this.totalGrounds = this.calculateGroundsFromBrew(
             this.totalBrew,
-            this.unitBrew,
+            this.unitBrewSelect.value,
             this.unitGroundsSelect.value,
             this.ratioSelect.value
           );
           this.calculateWaterRatio(
             this.totalGrounds,
             this.unitGroundsSelect.value,
-            this.unitWater,
+            this.unitWaterSelect.value,
             this.ratioSelect.value
           );
           break;
@@ -254,9 +235,9 @@ export default {
 };
 </script>
 <style scoped>
-  .v-select {
-    font-size: .9em;
-  }
+.v-select {
+  font-size: 0.9em;
+}
 .main {
   padding: 20px;
 }
