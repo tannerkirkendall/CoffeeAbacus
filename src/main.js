@@ -6,7 +6,7 @@ import vuetify from "./plugins/vuetify";
 import VueGtag from "vue-gtag";
 
 Vue.use(VueGtag, {
-  config: { id: "coffeeabacus-2020" }
+  config: { id: "UA-158921453-1" }
 });
 
 
