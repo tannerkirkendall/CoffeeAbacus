@@ -69,7 +69,7 @@
         <v-container fluid>
           <h2>Grounds</h2>
           <v-row align="center">
-            <v-col class="d-flex" cols="12" sm="6">
+            <v-col class="d-flex" cols="6" sm="6" xs="2">
               <v-text-field
                 type="Number"
                 name="grounds"
@@ -79,7 +79,7 @@
               ></v-text-field>
             </v-col>
 
-            <v-col class="d-flex" cols="12" sm="6">
+            <v-col class="d-flex" cols="6" sm="6" xs="2">
               <v-select
                 v-model="unitGroundsSelect"
                 :items="unitListDry"
@@ -254,8 +254,11 @@ export default {
 };
 </script>
 <style scoped>
+  .v-select {
+    font-size: .9em;
+  }
 .main {
-  padding: 25px;
+  padding: 20px;
 }
 #back-box {
   width: 100%;
@@ -263,11 +266,11 @@ export default {
   min-width: 200px;
   background-color: whitesmoke;
   border-radius: 15px;
-  padding: 30px;
+  padding: 15px;
   margin: auto;
 }
 #control-box {
-  width: 90%; /*can be in percentage also.*/
+  width: 95%; /*can be in percentage also.*/
   /* background-color: aqua; */
   height: auto;
   margin: 0 auto;
