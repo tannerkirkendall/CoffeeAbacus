@@ -66,50 +66,48 @@
           </div>
         </div>
 
-        <div class="input-head">
+        <v-container fluid>
           <h2>Grounds</h2>
-        </div>
-        <div class="input-box">
-          <div class="input-line">
-            <v-text-field
-              type="Number"
-              name="grounds"
-              min="0"
-              v-model="totalGrounds"
-              v-on:input="changeGrounds"
-            ></v-text-field>
-          </div>
-          <div class="input-unit">
-            <div class="select">
-              <select
-                v-model="unitGrounds"
-                class="select-text"
-                required
-                v-on:change="getValuesAndCalculate"
-              >
-                <option value="1">Grams</option>
-                <option value="28.3527076">Ounces</option>
-                <option value="7.00035">Tablespoons</option>
-              </select>
-              <span class="select-highlight"></span>
-              <span class="select-bar"></span>
-              <label class="select-label"></label>
-            </div>
-          </div>
-        </div>
+          <v-row align="center">
+            <v-col class="d-flex" cols="12" sm="6">
+              <v-text-field
+                type="Number"
+                name="grounds"
+                min="0"
+                v-model="totalGrounds"
+                v-on:input="changeGrounds"
+              ></v-text-field>
+            </v-col>
 
-        <h2>Ratio</h2>
-        <div class="select">
-          <v-select
-            v-model="ratioSelect"
-            :items="ratiosList"
-            item-text="title"
-            item-value="value"
-            v-on:change="getValuesAndCalculate"
-            return-object
-            outlined
-          ></v-select>
-        </div>
+            <v-col class="d-flex" cols="12" sm="6">
+              <v-select
+                v-model="unitGroundsSelect"
+                :items="unitListDry"
+                item-text="title"
+                item-value="value"
+                v-on:change="getValuesAndCalculate"
+                return-object
+                outlined
+              ></v-select>
+            </v-col>
+          </v-row>
+
+          <h2>Ratio</h2>
+          <v-row align="center">
+            <v-col class="d-flex" cols="12" sm="12">
+            <v-select
+              v-model="ratioSelect"
+              :items="ratiosList"
+              item-text="title"
+              item-value="value"
+              v-on:change="getValuesAndCalculate"
+              return-object
+              outlined
+            ></v-select>
+            </v-col>
+
+          </v-row>
+        </v-container>
       </div>
     </div>
   </div>
@@ -124,11 +122,21 @@ export default {
       totalGrounds: "",
       totalBrew: "",
       totalWater: "",
-      unitGrounds: "1",
+      unitGroundsSelect: { title: "Grams", value: 1 },
       unitBrew: "29.5735",
+      unitBrewSelect: { title: "Ounces", value: 29.5735 },
       unitWater: "1",
-      ratio: "17",
-      ratioTitle: "17:1",
+      unitWaterSelect: { title: "Milliliters", value: 1 },
+      unitListVolume: [
+        { title: "Milliliters", value: 1 },
+        { title: "Cups", value: 236.588 },
+        { title: "Ounces", value: 29.5735 }
+      ],
+      unitListDry: [
+        { title: "Grams", value: 1 },
+        { title: "Ounces", value: 28.3527076 },
+        { title: "Tablespoons", value: 7.00035 }
+      ],
       ratiosList: [
         { title: "14:1", value: 14 },
         { title: "15:1", value: 15 },
@@ -176,7 +184,7 @@ export default {
         case "grounds":
           this.totalWater = this.calculateWaterRatio(
             this.totalGrounds,
-            this.unitGrounds,
+            this.unitGroundsSelect.value,
             this.unitWater,
             this.ratioSelect.value
           );
@@ -184,7 +192,7 @@ export default {
             this.totalWater,
             this.unitWater,
             this.totalGrounds,
-            this.unitGrounds,
+            this.unitGroundsSelect.value,
             this.unitBrew
           );
           break;
@@ -193,13 +201,13 @@ export default {
             this.totalWater,
             this.unitWater,
             this.ratioSelect.value,
-            this.unitGrounds
+            this.unitGroundsSelect.value
           );
           this.calculateBrewRatio(
             this.totalWater,
             this.unitWater,
             this.totalGrounds,
-            this.unitGrounds,
+            this.unitGroundsSelect.value,
             this.unitBrew
           );
           break;
@@ -207,12 +215,12 @@ export default {
           this.totalGrounds = this.calculateGroundsFromBrew(
             this.totalBrew,
             this.unitBrew,
-            this.unitGrounds,
+            this.unitGroundsSelect.value,
             this.ratioSelect.value
           );
           this.calculateWaterRatio(
             this.totalGrounds,
-            this.unitGrounds,
+            this.unitGroundsSelect.value,
             this.unitWater,
             this.ratioSelect.value
           );
@@ -276,9 +284,4 @@ export default {
   width: 75%;
   /* background-color: brown; */
 }
-/* select starting stylings ------------------------------*/
-.select {
-  width: 30%;
-}
-
 </style>
