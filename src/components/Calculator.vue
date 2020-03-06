@@ -1,11 +1,10 @@
 <template>
-  <div class="main">
     <div id="back-box">
-      <div id="control-box">
-        <v-container fluid>
+
+        <v-container id="control-box" fluid>
           <h2>Total Brew</h2>
           <v-row align="center">
-            <v-col class="d-flex" cols="6" sm="6" xs="2">
+            <v-col class="d-flex" sm="8" xs="4">
               <v-text-field
                 type="Number"
                 name="brew"
@@ -15,7 +14,7 @@
               ></v-text-field>
             </v-col>
 
-            <v-col class="d-flex" cols="6" sm="6" xs="2">
+            <v-col class="d-flex" sm="4" xs="4">
               <v-select
                 v-model="unitBrewSelect"
                 :items="unitListVolume"
@@ -30,7 +29,7 @@
 
           <h2>Water</h2>
           <v-row align="center">
-            <v-col class="d-flex" cols="6" sm="6" xs="2">
+            <v-col class="d-flex" sm="8" xs="4">
               <v-text-field
                 type="Number"
                 name="water"
@@ -40,7 +39,7 @@
               ></v-text-field>
             </v-col>
 
-            <v-col class="d-flex" cols="6" sm="6" xs="2">
+            <v-col class="d-flex" sm="4" xs="4">
               <v-select
                 v-model="unitWaterSelect"
                 :items="unitListVolume"
@@ -55,7 +54,7 @@
 
           <h2>Grounds</h2>
           <v-row align="center">
-            <v-col class="d-flex" cols="6" sm="6" xs="2">
+            <v-col class="d-flex" sm="8" xs="4">
               <v-text-field
                 type="Number"
                 name="grounds"
@@ -65,7 +64,7 @@
               ></v-text-field>
             </v-col>
 
-            <v-col class="d-flex" cols="6" sm="6" xs="2">
+            <v-col class="d-flex" sm="4" xs="4">
               <v-select
                 v-model="unitGroundsSelect"
                 :items="unitListDry"
@@ -80,7 +79,7 @@
 
           <h2>Ratio</h2>
           <v-row align="center">
-            <v-col class="d-flex" cols="12" sm="12">
+            <v-col class="d-flex" cols="12">
               <v-select
                 v-model="ratioSelect"
                 :items="ratiosList"
@@ -93,9 +92,7 @@
             </v-col>
           </v-row>
         </v-container>
-      </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -238,34 +235,14 @@ export default {
 .v-select {
   font-size: 0.9em;
 }
-.main {
-  padding: 20px;
-}
 #back-box {
-  width: 100%;
-  max-width: 500px;
   min-width: 200px;
   background-color: whitesmoke;
   border-radius: 15px;
-  padding: 15px;
-  margin: auto;
 }
 #control-box {
-  width: 95%; /*can be in percentage also.*/
-  /* background-color: aqua; */
-  height: auto;
-  margin: 0 auto;
-  position: relative;
-}
-.input-box {
-  /* background-color: blue; */
-  display: flex;
-}
-.input-head {
-  width: 100%;
-}
-.input-line {
-  width: 75%;
-  /* background-color: brown; */
+  padding: 30px;
+  /* width: 100%; */
+  /* margin: 0 auto; */
 }
 </style>

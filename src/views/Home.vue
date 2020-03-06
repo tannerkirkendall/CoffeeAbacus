@@ -16,4 +16,12 @@ export default {
 };
 </script>
 <style scoped>
+  .home {
+  width: 100%;
+    max-width: 600px;
+    margin: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+  }
 </style>

@@ -20,11 +20,11 @@ export default {
   name: "App",
   metaInfo: {
     // Children can override the title.
-    title: "Coffee Abacus",
+    title: "Coffee Calculator",
     // Result: My Page Title ← My Site
     // If a child changes the title to "My Other Page Title",
     // it will become: My Other Page Title ← My Site
-    titleTemplate: "%s ← Coffee Ratio Calculator",
+    titleTemplate: "Coffee Calculator | Water to Coffee Ratio",
     // Define meta tags here.
     meta: [
       { "http-equiv": "Content-Type", content: "text/html; charset=utf-8" },
