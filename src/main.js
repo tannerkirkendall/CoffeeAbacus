@@ -3,13 +3,13 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import vuetify from "./plugins/vuetify";
-import VueGtag from "vue-gtag";
 import Meta from 'vue-meta';
+import VueAnalytics from 'vue-analytics';
 
-Vue.use(VueGtag, {
-  config: { id: "UA-158921453-1" }
-});
-
+Vue.use(VueAnalytics, {
+  id: '223435784',
+  router
+})
 
 Vue.config.productionTip = false;
 Vue.use(Meta);
@@ -20,3 +20,6 @@ new Vue({
   vuetify,
   render: h => h(App)
 }).$mount("#app");
+
+
+
